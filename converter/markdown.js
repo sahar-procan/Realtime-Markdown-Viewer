@@ -72,11 +72,21 @@ var parseStrong = function(str) {
   return str;
  }
 
+
  var parseBlockQuote = function(str) {
   var quoteRegExp = /\:\"(.*?)\"\:/
   var stra = [];
   while ((stra = quoteRegExp.exec(str)) !== null) {
     str = str.replace(stra[0], '<blockquote>' + stra[1] + '</blockquote>');
+  }
+  return str;
+ }
+
+ var parseDel = function(str) {
+  var delRegExp = /\{(.*?)\}/
+  var stra = [];
+  while ((stra = delRegExp.exec(str)) !== null) {
+    str = str.replace(stra[0], '<del>' + stra[1] + '</del>');
   }
   return str;
  }
@@ -93,6 +103,7 @@ var markdown = {
     str = parseLink(str);
     str = parseCode(str);
     str = parseBlockQuote(str);
+    str = parseDel(str);
     return str;
   }
 };
